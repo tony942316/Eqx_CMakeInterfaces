@@ -6,4 +6,9 @@ include("${CMAKE_CURRENT_LIST_DIR}/TSan/TSan.cmake")
 include("${CMAKE_CURRENT_LIST_DIR}/UBSan/UBSan.cmake")
 
 add_library(EQX-Sanitizers INTERFACE)
-target_link_libraries(EQX-Sanitizers INTERFACE EQX-ASan EQX-LSan EQX-UBSan)
+
+if (CMAKE_CXX_COMPILER_ID STREQUAL "MSVC")
+    target_link_libraries(EQX-Sanitizers INTERFACE EQX-ASan)
+else ()
+    target_link_libraries(EQX-Sanitizers INTERFACE EQX-ASan EQX-LSan EQX-UBSan)
+endif()
