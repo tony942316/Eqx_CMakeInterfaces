@@ -1,0 +1,15 @@
+Diagnostics:
+  ClangTidy:
+    FastCheckFilter: None
+    Add: [ clang-diagnostic-*,
+      cppcoreguidelines-*,
+      misc-*,
+      performance-*,
+      readability-*,
+      modernize-*,
+      clang-analyzer-*,
+      bugprone-* ]
+    Remove: [ performance-avoid-endl,
+      modernize-use-trailing-return-type,
+      readability-avoid-const-params-in-decls ]
+  UnusedIncludes: None
