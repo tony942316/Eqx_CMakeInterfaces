@@ -1,7 +1,7 @@
 cmake_minimum_required(VERSION 3.28)
 
 project(EQX-CMakeInterfaces
-    VERSION 0.1.0
+    VERSION 1.0.0
     DESCRIPTION "Common Flags As CMake Interface Targets"
     LANGUAGES CXX)
 
