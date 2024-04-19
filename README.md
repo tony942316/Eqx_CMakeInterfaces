@@ -9,7 +9,7 @@
 ## Summary <a name="summary"></a>
 
 Collection of CMake interfaces that provide common compiler flags in a platform
-agnostic fashion.
+agnostic fashion, CMake version 3.28+ is required.
 
 Basic Example ->
 ```cmake
@@ -25,6 +25,8 @@ set_target_properties(Main PROPERTIES
     CXX_EXTENSIONS Off
     EXPORT_COMPILE_COMMANDS On)
 ```
+With EQX-Warnings linked to this target the compiler will now have -Wall or
+/W4 passed to it.
 
 ## Features <a name="features"></a>
 
@@ -41,11 +43,11 @@ set_target_properties(Main PROPERTIES
     - EQX-TSan          (Provides -fsanitize=thread)
     - EQX-UBSan         (Provides -fsanitize=undefined)
 
-- EQX-Typical           (Provides those below based of Operating System)
+- EQX-Typical           (Provides those below based on compiler and config)
     - EQX-Warnings      (All)
-    - EQX-DebugSymbols  (Linux:All,Windows:Debug)
-    - EQX-Optimizations (Linux:None,Windows:Release)
-    - EQX-Sanitizers    (Linux:All,Windows:Debug)
+    - EQX-DebugSymbols  (GCC/Clang:All,MSVC:Debug)
+    - EQX-Optimizations (GCC/Clang:None,MSVC:Release)
+    - EQX-Sanitizers    (GCC/Clang:All,MSVC:Debug)
 
 ## Usage <a name="usage"></a>
 
@@ -71,3 +73,9 @@ set_target_properties(Main PROPERTIES
     CXX_EXTENSIONS Off
     EXPORT_COMPILE_COMMANDS On)
 ```
+
+With EQX-Typical the compiler will have the following flags
+- MSVC (Debug): /W4 /Zi /fsanitize=address
+- MSVC (Release): /W4 /fp:fast /EHcs /GR- /O2t
+- GCC/Clang: -Wall -Wextra -Wconversion -Wpedantic -g3 -fsanitize=address
+-fsanitize=leak -fsanitize=undefined
