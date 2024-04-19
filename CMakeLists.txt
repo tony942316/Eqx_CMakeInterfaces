@@ -9,13 +9,14 @@ include(Interfaces.cmake)
 
 add_executable(Main)
 target_sources(Main PRIVATE Main.cpp)
+target_link_libraries(Main PRIVATE EQX-Warnings)
 if (CMAKE_CXX_COMPILER_ID STREQUAL "MSVC")
     target_link_libraries(Main PRIVATE
-        "$<$<CONFIG:Debug>:EQX-Warnings;EQX-DebugSymbols;EQX-Sanitizers>"
-        "$<$<CONFIG:Release>:EQX-Warnings;EQX-Optimizations>")
+        "$<$<CONFIG:Debug>:EQX-DebugSymbols;EQX-Sanitizers>"
+        "$<$<CONFIG:Release>:EQX-Optimizations>")
 else ()
     target_link_libraries(Main PRIVATE
-        EQX-DebugSymbols EQX-Optimizations EQX-Sanitizers EQX-Warnings)
+        EQX-DebugSymbols EQX-Sanitizers)
 endif()
 
 set_target_properties(Main PROPERTIES
