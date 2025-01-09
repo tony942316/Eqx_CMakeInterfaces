@@ -1,4 +1,4 @@
-# EQX-CmakeInterfaces
+# Eqx_CMakeInterfaces
 
 ## Contents
 
@@ -13,68 +13,91 @@ agnostic fashion, CMake version 3.28+ is required.
 
 Basic Example ->
 ```cmake
-include(path/to/EQX-CmakeInterfaces/Interfaces.cmake)
+# CMakeLists.txt
+cmake_minimum_required(VERSION 3.28)
+
+include(FetchContent)
+
+FetchContent_Declare(
+    Eqx_CMakeInterfaces
+    GIT_REPOSITORY https://github.com/tony942316/Eqx_CMakeInterfaces.git
+    GIT_TAG main)
+
+FetchContent_MakeAvailable(Eqx_CMakeInterfaces)
+
+# Alternatively use include(path/to/Eqx_CMakeInterfaces/Interfaces.cmake)
 
 add_executable(Main)
 target_sources(Main PRIVATE Main.cpp)
 
-# EQX-Warnings is an interface that provides various compiler warning flags
-target_link_libraries(Main PRIVATE EQX-Warnings)
+# Eqx_Warnings is an interface that provides various compiler warning flags
+target_link_libraries(Main PRIVATE Eqx_Warnings)
 
 set_target_properties(Main PROPERTIES
     CXX_EXTENSIONS Off
     EXPORT_COMPILE_COMMANDS On)
 ```
-With EQX-Warnings linked to this target the compiler will now have -Wall or
+With Eqx_Warnings linked to this target the compiler will now have -Wall or
 /W4 passed to it.
 
 ## Features <a name="features"></a>
 
-- EQX-DebugSymbols      (Provides /Zi or -g3)
-- EQX-Warnings          (Provides /W4 or -Wall -Wextra -Wconversion -Wpedantic)
-- EQX-Optimizations     (Provides all of those below)
-    - EQX-FastMath      (Provides /fp:fast or -ffast-math)
-    - EQX-NoExceptions  (Provides /EHcs or -fno-exceptions)
-    - EQX-NoRTTI        (Provides /GR- or -fno-rtti)
-    - EQX-Regular       (Provides /O2t or -O3)
-- EQX-Sanitizers        (Provides ASan UBSan and LSan .. only ASan for Windows)
-    - EQX-ASan          (Provides /fsanitize=address or -fsanitize=address)
-    - EQX-LSan          (Provides -fsanitize=leak)
-    - EQX-TSan          (Provides -fsanitize=thread)
-    - EQX-UBSan         (Provides -fsanitize=undefined)
+- Eqx_DebugSymbols      (Provides /Zi or -g3)
 
-- EQX-Typical           (Provides those below based on compiler and config)
-    - EQX-Warnings      (All)
-    - EQX-DebugSymbols  (GCC/Clang:All,MSVC:Debug)
-    - EQX-Optimizations (GCC/Clang:None,MSVC:Release)
-    - EQX-Sanitizers    (GCC/Clang:All,MSVC:Debug)
+- Eqx_Warnings          (Provides /W4 or -Wall -Wextra -Wconversion -Wpedantic)
+
+- Eqx_Optimizations     (Provides all of those below)
+    - Eqx_FastMath      (Provides /fp:fast or -ffast-math)
+    - Eqx_NoExceptions  (Provides /EHcs or -fno-exceptions)
+    - Eqx_NoRTTI        (Provides /GR- or -fno-rtti)
+    - Eqx_Regular       (Provides /O2t or -O3)
+
+- Eqx_Sanitizers        (Provides ASan UBSan and LSan .. only ASan for Windows)
+    - Eqx_ASan          (Provides /fsanitize=address or -fsanitize=address)
+    - Eqx_LSan          (Provides -fsanitize=leak)
+    - Eqx_TSan          (Provides -fsanitize=thread)
+    - Eqx_UBSan         (Provides -fsanitize=undefined)
+
+- Eqx_Typical           (Provides those below based on compiler and config)
+    - Eqx_Warnings      (All)
+    - Eqx_DebugSymbols  (GCC/Clang:All,MSVC:Debug)
+    - Eqx_Optimizations (GCC/Clang:None,MSVC:Release)
+    - Eqx_Sanitizers    (GCC/Clang:All,MSVC:Debug)
 
 ## Usage <a name="usage"></a>
 
-To use EQX-CmakeInterfaces in your project you should first clone the repo onto
-your system. After that all you would need to do is setup your CMake project as
-normal and `include(path/to/EQX-CMakeInterfaces/Interfaces.cmake)`.
+To use Eqx_CMakeInterfaces in your project use FetchContent to obtain the repo,
+alternatively you may clone, download, or extract the repo onto your system
+and `include(path/to/Eqx_CMakeInterfaces/Interfaces.cmake)`.
 
 Example ->
 ```cmake
 # CMakeLists.txt
 cmake_minimum_required(VERSION 3.28)
 
-# Location of EQX-CMakeInterfaces relative to your project
-include(EQX-CmakeInterfaces/Interfaces.cmake)
+include(FetchContent)
+
+FetchContent_Declare(
+    Eqx_CMakeInterfaces
+    GIT_REPOSITORY https://github.com/tony942316/Eqx_CMakeInterfaces.git
+    GIT_TAG main)
+
+FetchContent_MakeAvailable(Eqx_CMakeInterfaces)
+
+# Alternatively use include(path/to/Eqx_CMakeInterfaces/Interfaces.cmake)
 
 add_executable(Main)
 target_sources(Main PRIVATE Main.cpp)
 
-# Link your target to an EQX Interface
-target_link_libraries(Main PRIVATE EQX-Typical)
+# Link your target to an Eqx Interface
+target_link_libraries(Main PRIVATE Eqx_Typical)
 
 set_target_properties(Main PROPERTIES
     CXX_EXTENSIONS Off
     EXPORT_COMPILE_COMMANDS On)
 ```
 
-With EQX-Typical the compiler will have the following flags
+With Eqx_Typical the compiler will have the following flags
 - MSVC (Debug): /W4 /Zi /fsanitize=address
 - MSVC (Release): /W4 /fp:fast /EHcs /GR- /O2t
 - GCC/Clang: -Wall -Wextra -Wconversion -Wpedantic -g3 -fsanitize=address
