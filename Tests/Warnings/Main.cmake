@@ -36,7 +36,7 @@ file(GENERATE
 
 file(GENERATE
     OUTPUT $<CONFIG>/Main_Expected_Opts.txt
-    CONTENT "${Main_Expected_Opts}")
+    CONTENT "$<JOIN:$<FILTER:${Main_Expected_Opts},EXCLUDE,^$>,;>")
 
 add_test(NAME Main_Warnings
     COMMAND ${CMAKE_COMMAND} -E compare_files

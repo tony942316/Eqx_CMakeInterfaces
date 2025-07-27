@@ -64,7 +64,7 @@ file(GENERATE
 
 file(GENERATE
     OUTPUT $<CONFIG>/Piecewise_Expected_Opts.txt
-    CONTENT "${Piecewise_Expected_Opts}")
+    CONTENT "$<JOIN:$<FILTER:${Piecewise_Expected_Opts},EXCLUDE,^$>,;>")
 
 add_test(NAME Piecewise_Sanitizers
     COMMAND ${CMAKE_COMMAND} -E compare_files
