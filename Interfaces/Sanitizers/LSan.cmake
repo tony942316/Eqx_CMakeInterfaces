@@ -1,9 +1,12 @@
 cmake_minimum_required(VERSION 3.28)
 
-if (CMAKE_CXX_COMPILER_ID STREQUAL "MSVC")
-    message("MSVC Does Not Support Leak Sanitizer!!!")
+add_library(Eqx_Sanitizers_LSan INTERFACE)
+
+if (Eqx_GNU OR Eqx_Clang)
+    target_compile_options(Eqx_Sanitizers_LSan INTERFACE -fsanitize=leak)
+    target_link_options(Eqx_Sanitizers_LSan INTERFACE -fsanitize=leak)
+elseif (Eqx_MSVC)
+    message(FATAL_ERROR "TODO")
 else ()
-    add_library(Eqx_LSan INTERFACE)
-    target_compile_options(Eqx_LSan INTERFACE -fsanitize=leak)
-    target_link_options(Eqx_LSan INTERFACE -fsanitize=leak)
+    message(FATAL_ERROR "Invalid Configuration!")
 endif()

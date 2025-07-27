@@ -1,11 +1,14 @@
 cmake_minimum_required(VERSION 3.28)
 
-add_library(Eqx_FastMath INTERFACE)
+add_library(Eqx_Optimizations_FastMath INTERFACE)
 
-if (CMAKE_CXX_COMPILER_ID STREQUAL "MSVC")
-    target_compile_options(Eqx_FastMath INTERFACE
+if (Eqx_GNU OR Eqx_Clang)
+    target_compile_options(Eqx_Optimizations_FastMath INTERFACE
+        -ffast-math)
+elseif (Eqx_MSVC)
+    message(FATAL_ERROR "TODO")
+    target_compile_options(Eqx_Optimizations_FastMath INTERFACE
         /fp:fast)
 else ()
-    target_compile_options(Eqx_FastMath INTERFACE
-        -ffast-math)
+    message(FATAL_ERROR "Invalid Configuration!")
 endif()

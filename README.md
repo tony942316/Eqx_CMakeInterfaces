@@ -26,6 +26,7 @@ FetchContent_Declare(
 FetchContent_MakeAvailable(Eqx_CMakeInterfaces)
 
 # Alternatively use include(path/to/Eqx_CMakeInterfaces/Interfaces.cmake)
+# Or use add_subdirectory(path/to/Eqx_CMakeInterfaces)
 
 add_executable(Main)
 target_sources(Main PRIVATE Main.cpp)
@@ -38,7 +39,7 @@ set_target_properties(Main PROPERTIES
     EXPORT_COMPILE_COMMANDS On)
 ```
 With Eqx_Warnings linked to this target the compiler will now have -Wall or
-/W4 passed to it.
+/W4 passed to it depending on the compiler.
 
 ## Features <a name="features"></a>
 
@@ -68,7 +69,8 @@ With Eqx_Warnings linked to this target the compiler will now have -Wall or
 
 To use Eqx_CMakeInterfaces in your project use FetchContent to obtain the repo,
 alternatively you may clone, download, or extract the repo onto your system
-and `include(path/to/Eqx_CMakeInterfaces/Interfaces.cmake)`.
+and `include(path/to/Eqx_CMakeInterfaces/Interfaces.cmake)` or
+`add_subdirectory(path/to/Eqx_CMakeInterfaces)`.
 
 Example ->
 ```cmake
@@ -85,6 +87,7 @@ FetchContent_Declare(
 FetchContent_MakeAvailable(Eqx_CMakeInterfaces)
 
 # Alternatively use include(path/to/Eqx_CMakeInterfaces/Interfaces.cmake)
+# Or use add_subdirectory(path/to/Eqx_CMakeInterfaces)
 
 add_executable(Main)
 target_sources(Main PRIVATE Main.cpp)

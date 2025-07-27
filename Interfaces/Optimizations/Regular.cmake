@@ -1,13 +1,16 @@
 cmake_minimum_required(VERSION 3.28)
 
-add_library(Eqx_Regular INTERFACE)
+add_library(Eqx_Optimizations_Regular INTERFACE)
 
-target_compile_definitions(Eqx_Regular INTERFACE NDEBUG)
+target_compile_definitions(Eqx_Optimizations_Regular INTERFACE NDEBUG)
 
-if (CMAKE_CXX_COMPILER_ID STREQUAL "MSVC")
-    target_compile_options(Eqx_Regular INTERFACE
-        /O2t)
-else ()
-    target_compile_options(Eqx_Regular INTERFACE
+if (Eqx_GNU OR Eqx_Clang)
+    target_compile_options(Eqx_Optimizations_Regular INTERFACE
         -O3)
+elseif (Eqx_MSVC)
+    message(FATAL_ERROR "TODO")
+    target_compile_options(Eqx_Optimizations_Regular INTERFACE
+        /O2t)
+else()
+    message(FATAL_ERROR "Invalid Configuration!")
 endif()

@@ -1,11 +1,14 @@
 cmake_minimum_required(VERSION 3.28)
 
-add_library(Eqx_NoExceptions INTERFACE)
+add_library(Eqx_Optimizations_NoExceptions INTERFACE)
 
-if (CMAKE_CXX_COMPILER_ID STREQUAL "MSVC")
-    target_compile_options(Eqx_NoExceptions INTERFACE
+if (Eqx_GNU OR Eqx_Clang)
+    target_compile_options(Eqx_Optimizations_NoExceptions INTERFACE
+        -fno-exceptions)
+elseif (Eqx_MSVC)
+    message(FATAL_ERROR "TODO")
+    target_compile_options(Eqx_Optimizations_NoExceptions INTERFACE
         /EHcs)
 else ()
-    target_compile_options(Eqx_NoExceptions INTERFACE
-        -fno-exceptions)
+    message(FATAL_ERROR "Invalid Configuration!")
 endif()

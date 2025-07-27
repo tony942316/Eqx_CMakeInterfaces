@@ -1,11 +1,14 @@
 cmake_minimum_required(VERSION 3.28)
 
-add_library(Eqx_NoRTTI INTERFACE)
+add_library(Eqx_Optimizations_NoRTTI INTERFACE)
 
-if (CMAKE_CXX_COMPILER_ID STREQUAL "MSVC")
-    target_compile_options(Eqx_NoRTTI INTERFACE
-        /GR-)
-else ()
-    target_compile_options(Eqx_NoRTTI INTERFACE
+if (Eqx_GNU OR Eqx_Clang)
+    target_compile_options(Eqx_Optimizations_NoRTTI INTERFACE
         -fno-rtti)
+elseif (Eqx_MSVC)
+    message(FATAL_ERROR "TODO")
+    target_compile_options(Eqx_Optimizations_NoRTTI INTERFACE
+        /GR-)
+else()
+    message(FATAL_ERROR "Invalid Configuration!")
 endif()

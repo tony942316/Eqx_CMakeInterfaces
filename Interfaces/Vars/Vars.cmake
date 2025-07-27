@@ -1,0 +1,27 @@
+cmake_minimum_required(VERSION 3.28)
+
+set(Eqx_GNU Off CACHE BOOL "Internal: Is GNU the active compiler" FORCE)
+set(Eqx_Clang Off CACHE BOOL "Internal: Is Clang the active compiler" FORCE)
+set(Eqx_MSVC Off CACHE BOOL "Internal: Is MSVC the active compiler" FORCE)
+mark_as_advanced(FORCE Eqx_GNU Eqx_Clang Eqx_MSVC)
+
+if (CMAKE_CXX_COMPILER_ID STREQUAL "GNU")
+    message(STATUS "Configuring for GCC")
+    set(Eqx_GNU On CACHE BOOL "Internal: Is GNU the active compiler" FORCE)
+elseif (CMAKE_CXX_COMPILER_ID STREQUAL "Clang")
+    message(STATUS "Configuring for Clang")
+    set(Eqx_Clang On CACHE BOOL "Internal: Is Clang the active compiler" FORCE)
+elseif (CMAKE_CXX_COMPILER_ID STREQUAL "MSVC")
+    message(STATUS "Configuring for MSVC")
+    set(Eqx_MSVC On CACHE BOOL "Internal: Is MSVC the active compiler" FORCE)
+else()
+    message(FATAL_ERROR "Unknown compiler: ${CMAKE_CXX_COMPILER_ID}")
+endif()
+
+message(STATUS "Compiler ID: ${CMAKE_CXX_COMPILER_ID}")
+
+if(CMAKE_CONFIGURATION_TYPES)
+    message(STATUS "Configured with multi-config")
+else()
+    message(FATAL_ERROR "Not compatible with single-config generators")
+endif()

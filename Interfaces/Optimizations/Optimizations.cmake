@@ -7,4 +7,5 @@ include("${CMAKE_CURRENT_LIST_DIR}/Regular.cmake")
 
 add_library(Eqx_Optimizations INTERFACE)
 target_link_libraries(Eqx_Optimizations INTERFACE
-    Eqx_FastMath Eqx_NoExceptions Eqx_NoRTTI Eqx_Regular)
+    Eqx_Optimizations_FastMath Eqx_Optimizations_NoExceptions
+    Eqx_Optimizations_NoRTTI Eqx_Optimizations_Regular)
