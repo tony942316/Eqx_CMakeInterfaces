@@ -3,6 +3,7 @@
 add_executable(Test_Warnings_Basic)
 target_sources(Test_Warnings_Basic PRIVATE
     ${CMAKE_CURRENT_SOURCE_DIR}/../Simple.cpp)
+target_compile_features(Test_Warnings_Basic PRIVATE cxx_std_17)
 target_link_libraries(Test_Warnings_Basic PRIVATE Eqx_Warnings_Basic)
 set_target_properties(Test_Warnings_Basic PROPERTIES
     CXX_EXTENSIONS Off
@@ -11,6 +12,7 @@ set_target_properties(Test_Warnings_Basic PROPERTIES
 add_executable(Test_Warnings_Error)
 target_sources(Test_Warnings_Error PRIVATE
     ${CMAKE_CURRENT_SOURCE_DIR}/../Simple.cpp)
+target_compile_features(Test_Warnings_Error PRIVATE cxx_std_17)
 target_link_libraries(Test_Warnings_Error PRIVATE Eqx_Warnings_Error)
 set_target_properties(Test_Warnings_Error PROPERTIES
     CXX_EXTENSIONS Off
@@ -19,6 +21,7 @@ set_target_properties(Test_Warnings_Error PROPERTIES
 add_executable(Test_Warnings_Additional)
 target_sources(Test_Warnings_Additional PRIVATE
     ${CMAKE_CURRENT_SOURCE_DIR}/../Simple.cpp)
+target_compile_features(Test_Warnings_Additional PRIVATE cxx_std_17)
 target_link_libraries(Test_Warnings_Additional PRIVATE Eqx_Warnings_Additional)
 set_target_properties(Test_Warnings_Additional PROPERTIES
     CXX_EXTENSIONS Off
@@ -43,10 +46,12 @@ if (Eqx_GNU OR Eqx_Clang)
         list(APPEND Piecewise_Expected_Opts -Wbad-function-cast)
     endif()
 elseif (Eqx_MSVC)
-    message(FATAL_ERROR "TODO")
+    list(APPEND Piecewise_Expected_Opts /W4 /WX "")
 else()
     message(FATAL_ERROR "Failure!")
 endif()
+
+#message(FATAL_ERROR "${Piecewise_Expected_Opts}")
 
 file(GENERATE
     OUTPUT $<CONFIG>/Piecewise_Opts.txt

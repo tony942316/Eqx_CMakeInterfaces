@@ -3,6 +3,7 @@
 add_executable(Test_Warnings)
 target_sources(Test_Warnings PRIVATE
     ${CMAKE_CURRENT_SOURCE_DIR}/../Simple.cpp)
+target_compile_features(Test_Warnings PRIVATE cxx_std_17)
 target_link_libraries(Test_Warnings PRIVATE Eqx_Warnings)
 set_target_properties(Test_Warnings PROPERTIES
     CXX_EXTENSIONS Off
@@ -24,7 +25,7 @@ if (Eqx_GNU OR Eqx_Clang)
         list(APPEND Main_Expected_Opts -Wbad-function-cast)
     endif()
 elseif (Eqx_MSVC)
-    message(FATAL_ERROR "TODO")
+    list(APPEND Main_Expected_Opts /W4)
 else()
     message(FATAL_ERROR "Failure!")
 endif()

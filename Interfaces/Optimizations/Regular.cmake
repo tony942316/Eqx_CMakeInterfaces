@@ -8,9 +8,8 @@ if (Eqx_GNU OR Eqx_Clang)
     target_compile_options(Eqx_Optimizations_Regular INTERFACE
         -O3)
 elseif (Eqx_MSVC)
-    message(FATAL_ERROR "TODO")
     target_compile_options(Eqx_Optimizations_Regular INTERFACE
-        /O2t)
+        $<IF:$<CONFIG:Debug>,/Od,/O2>)
 else()
     message(FATAL_ERROR "Invalid Configuration!")
 endif()

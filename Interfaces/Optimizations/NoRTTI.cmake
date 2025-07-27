@@ -6,7 +6,6 @@ if (Eqx_GNU OR Eqx_Clang)
     target_compile_options(Eqx_Optimizations_NoRTTI INTERFACE
         -fno-rtti)
 elseif (Eqx_MSVC)
-    message(FATAL_ERROR "TODO")
     target_compile_options(Eqx_Optimizations_NoRTTI INTERFACE
         /GR-)
 else()

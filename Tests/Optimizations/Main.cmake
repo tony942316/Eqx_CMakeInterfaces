@@ -3,6 +3,7 @@
 add_executable(Test_Optimizations)
 target_sources(Test_Optimizations PRIVATE
     ${CMAKE_CURRENT_SOURCE_DIR}/../Simple.cpp)
+target_compile_features(Test_Optimizations PRIVATE cxx_std_17)
 target_link_libraries(Test_Optimizations PRIVATE
     Eqx_Optimizations)
 set_target_properties(Test_Optimizations PROPERTIES
@@ -17,7 +18,8 @@ if (Eqx_GNU OR Eqx_Clang)
     list(APPEND Main_Expected_Opts
         -ffast-math -fno-exceptions -fno-rtti -O3)
 elseif (Eqx_MSVC)
-    message(FATAL_ERROR "TODO")
+    list(APPEND Main_Expected_Opts
+        /fp:fast /EHcs /GR- $<IF:$<CONFIG:Debug>,/Od,/O2>)
 else()
     message(FATAL_ERROR "FAILURE!")
 endif()

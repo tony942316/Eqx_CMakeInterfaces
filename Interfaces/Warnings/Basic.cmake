@@ -6,7 +6,6 @@ if (Eqx_GNU OR Eqx_Clang)
     target_compile_options(Eqx_Warnings_Basic INTERFACE
         -Wall -Wextra -Wpedantic -Wconversion)
 elseif (Eqx_MSVC)
-    message(FATAL_ERROR "TODO")
     target_compile_options(Eqx_Warnings_Basic INTERFACE
         /W4)
 else()

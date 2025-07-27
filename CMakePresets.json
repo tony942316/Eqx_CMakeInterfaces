@@ -30,6 +30,15 @@
             {
                 "CMAKE_CXX_COMPILER": "clang++-18"
             }
+        },
+        {
+            "name": "cl",
+            "displayName": "MSVC",
+            "binaryDir": "${sourceDir}/build/${presetName}",
+            "cacheVariables":
+            {
+                "CMAKE_CONFIGURATION_TYPES": "Debug;Release;RelWithDebInfo;MinSizeRel"
+            }
         }
     ],
 
@@ -45,6 +54,12 @@
             "name": "common-clang-18",
             "hidden": true,
             "configurePreset": "clang-18",
+            "jobs": 0
+        },
+        {
+            "name": "common-cl",
+            "hidden": true,
+            "configurePreset": "cl",
             "jobs": 0
         },
         {
@@ -85,6 +100,26 @@
         {
             "name": "clang-18-minsizerel",
             "inherits": [ "common-clang-18" ],
+            "configuration": "MinSizeRel"
+        },
+        {
+            "name": "cl-debug",
+            "inherits": [ "common-cl" ],
+            "configuration": "Debug"
+        },
+        {
+            "name": "cl-release",
+            "inherits": [ "common-cl" ],
+            "configuration": "Release"
+        },
+        {
+            "name": "cl-relwithdebinfo",
+            "inherits": [ "common-cl" ],
+            "configuration": "RelWithDebInfo"
+        },
+        {
+            "name": "cl-minsizerel",
+            "inherits": [ "common-cl" ],
             "configuration": "MinSizeRel"
         }
     ],
@@ -115,6 +150,11 @@
             "configurePreset": "clang-18"
         },
         {
+            "name": "cl",
+            "hidden": true,
+            "configurePreset": "cl"
+        },
+        {
             "name": "gcc-14-debug",
             "inherits": [ "common", "gcc-14" ],
             "configuration": "Debug"
@@ -152,6 +192,26 @@
         {
             "name": "clang-18-minsizerel",
             "inherits": [ "common", "clang-18" ],
+            "configuration": "MinSizeRel"
+        },
+        {
+            "name": "cl-debug",
+            "inherits": [ "common", "cl" ],
+            "configuration": "Debug"
+        },
+        {
+            "name": "cl-release",
+            "inherits": [ "common", "cl" ],
+            "configuration": "Release"
+        },
+        {
+            "name": "cl-relwithdebinfo",
+            "inherits": [ "common", "cl" ],
+            "configuration": "RelWithDebInfo"
+        },
+        {
+            "name": "cl-minsizerel",
+            "inherits": [ "common", "cl" ],
             "configuration": "MinSizeRel"
         }
 
@@ -240,6 +300,48 @@
                 {
                     "type": "test",
                     "name": "clang-18-minsizerel"
+                }
+            ]
+        },
+        {
+            "name": "cl",
+            "steps":
+            [
+                {
+                    "type": "configure",
+                    "name": "cl"
+                },
+                {
+                    "type": "build",
+                    "name": "cl-debug"
+                },
+                {
+                    "type": "build",
+                    "name": "cl-release"
+                },
+                {
+                    "type": "build",
+                    "name": "cl-relwithdebinfo"
+                },
+                {
+                    "type": "build",
+                    "name": "cl-minsizerel"
+                },
+                {
+                    "type": "test",
+                    "name": "cl-debug"
+                },
+                {
+                    "type": "test",
+                    "name": "cl-release"
+                },
+                {
+                    "type": "test",
+                    "name": "cl-relwithdebinfo"
+                },
+                {
+                    "type": "test",
+                    "name": "cl-minsizerel"
                 }
             ]
         }

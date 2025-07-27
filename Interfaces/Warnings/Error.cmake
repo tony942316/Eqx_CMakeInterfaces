@@ -6,7 +6,6 @@ if (Eqx_GNU OR Eqx_Clang)
     target_compile_options(Eqx_Warnings_Error INTERFACE
         -Werror)
 elseif (Eqx_MSVC)
-    message(FATAL_ERROR "TODO")
     target_compile_options(Eqx_Warnings_Error INTERFACE
         /WX)
 else()

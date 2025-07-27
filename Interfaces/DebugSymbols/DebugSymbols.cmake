@@ -6,7 +6,6 @@ if (Eqx_GNU OR Eqx_Clang)
     target_compile_options(Eqx_Debug_Symbols INTERFACE
         -g3)
 elseif (Eqx_MSVC)
-    message(FATAL_ERROR "TODO")
     target_compile_options(Eqx_Debug_Symbols INTERFACE
         /Zi)
 else()

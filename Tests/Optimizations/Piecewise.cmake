@@ -3,6 +3,7 @@
 add_executable(Test_Optimizations_FastMath)
 target_sources(Test_Optimizations_FastMath PRIVATE
     ${CMAKE_CURRENT_SOURCE_DIR}/../Simple.cpp)
+target_compile_features(Test_Optimizations_FastMath PRIVATE cxx_std_17)
 target_link_libraries(Test_Optimizations_FastMath PRIVATE
     Eqx_Optimizations_FastMath)
 set_target_properties(Test_Optimizations_FastMath PROPERTIES
@@ -12,6 +13,7 @@ set_target_properties(Test_Optimizations_FastMath PROPERTIES
 add_executable(Test_Optimizations_Regular)
 target_sources(Test_Optimizations_Regular PRIVATE
     ${CMAKE_CURRENT_SOURCE_DIR}/../Simple.cpp)
+target_compile_features(Test_Optimizations_Regular PRIVATE cxx_std_17)
 target_link_libraries(Test_Optimizations_Regular PRIVATE
     Eqx_Optimizations_Regular)
 set_target_properties(Test_Optimizations_Regular PROPERTIES
@@ -21,6 +23,7 @@ set_target_properties(Test_Optimizations_Regular PROPERTIES
 add_executable(Test_Optimizations_NoRTTI)
 target_sources(Test_Optimizations_NoRTTI PRIVATE
     ${CMAKE_CURRENT_SOURCE_DIR}/../Simple.cpp)
+target_compile_features(Test_Optimizations_NoRTTI PRIVATE cxx_std_17)
 target_link_libraries(Test_Optimizations_NoRTTI PRIVATE
     Eqx_Optimizations_NoRTTI)
 set_target_properties(Test_Optimizations_NoRTTI PROPERTIES
@@ -30,6 +33,7 @@ set_target_properties(Test_Optimizations_NoRTTI PROPERTIES
 add_executable(Test_Optimizations_NoExceptions)
 target_sources(Test_Optimizations_NoExceptions PRIVATE
     ${CMAKE_CURRENT_SOURCE_DIR}/../Simple.cpp)
+target_compile_features(Test_Optimizations_NoExceptions PRIVATE cxx_std_17)
 target_link_libraries(Test_Optimizations_NoExceptions PRIVATE
     Eqx_Optimizations_NoExceptions)
 set_target_properties(Test_Optimizations_NoExceptions PROPERTIES
@@ -47,7 +51,8 @@ if (Eqx_GNU OR Eqx_Clang)
     list(APPEND Piecewise_Expected_Opts
         -ffast-math -O3 -fno-rtti -fno-exceptions)
 elseif (Eqx_MSVC)
-    message(FATAL_ERROR "TODO")
+    list(APPEND Piecewise_Expected_Opts
+        /fp:fast $<IF:$<CONFIG:Debug>,/Od,/O2> /GR- /EHcs)
 else()
     message(FATAL_ERROR "FAILURE!")
 endif()

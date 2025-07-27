@@ -6,7 +6,6 @@ if (Eqx_GNU OR Eqx_Clang)
     target_compile_options(Eqx_Optimizations_FastMath INTERFACE
         -ffast-math)
 elseif (Eqx_MSVC)
-    message(FATAL_ERROR "TODO")
     target_compile_options(Eqx_Optimizations_FastMath INTERFACE
         /fp:fast)
 else ()
