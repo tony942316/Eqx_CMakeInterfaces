@@ -2,6 +2,7 @@
 
 [![CI](https://github.com/tony942316/Eqx_CMakeInterfaces/actions/workflows/ci_gcc_14.yml/badge.svg?branch=main)](https://github.com/tony942316/Eqx_CMakeInterfaces/actions/workflows/ci_gcc_14.yml)
 [![CI](https://github.com/tony942316/Eqx_CMakeInterfaces/actions/workflows/ci_clang_18.yml/badge.svg?branch=main)](https://github.com/tony942316/Eqx_CMakeInterfaces/actions/workflows/ci_clang_18.yml)
+[![CI](https://github.com/tony942316/Eqx_CMakeInterfaces/actions/workflows/ci_cl.yml/badge.svg?branch=main)](https://github.com/tony942316/Eqx_CMakeInterfaces/actions/workflows/ci_cl.yml)
 
 ## Contents
 
