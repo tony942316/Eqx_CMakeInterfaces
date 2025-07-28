@@ -1,5 +1,7 @@
 # Eqx_CMakeInterfaces
 
+[![CI](https://github.com/tony942316/Eqx_CMakeInterfaces/actions/workflows/ci.yml/badge.svg?branch=main)](https://github.com/tony942316/Eqx_CMakeInterfaces/actions/workflows/ci.yml)
+
 ## Contents
 
 1. [Summary](#summary)
