@@ -11,4 +11,4 @@ target_link_libraries(Eqx_Typical INTERFACE
     Eqx_Warnings
     $<$<CONFIG:Debug>:Eqx_Debug_Symbols;Eqx_Sanitizers>
     $<$<CONFIG:Release>:Eqx_Optimizations>
-    $<$<CONFIG:RelWithDebugInfo>:Eqx_Debug_Symbols;Eqx_Optimizations>)
+    $<$<CONFIG:RelWithDebInfo>:Eqx_Debug_Symbols;Eqx_Optimizations>)
