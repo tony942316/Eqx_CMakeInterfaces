@@ -46,7 +46,7 @@ if (Eqx_GNU OR Eqx_Clang)
         list(APPEND Piecewise_Expected_Opts -Wbad-function-cast)
     endif()
 elseif (Eqx_MSVC)
-    list(APPEND Piecewise_Expected_Opts /W4 /WX "")
+    list(APPEND Piecewise_Expected_Opts /W4 /WX)
 else()
     message(FATAL_ERROR "Failure!")
 endif()
@@ -55,7 +55,7 @@ endif()
 
 file(GENERATE
     OUTPUT $<CONFIG>/Piecewise_Opts.txt
-    CONTENT "${Piecewise_Opts}")
+    CONTENT "$<JOIN:$<FILTER:${Piecewise_Opts},EXCLUDE,^$>,;>")
 
 file(GENERATE
     OUTPUT $<CONFIG>/Piecewise_Expected_Opts.txt

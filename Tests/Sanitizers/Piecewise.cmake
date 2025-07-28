@@ -60,7 +60,7 @@ endif()
 
 file(GENERATE
     OUTPUT $<CONFIG>/Piecewise_Opts.txt
-    CONTENT "${Piecewise_Opts}")
+    CONTENT "$<JOIN:$<FILTER:${Piecewise_Opts},EXCLUDE,^$>,;>")
 
 file(GENERATE
     OUTPUT $<CONFIG>/Piecewise_Expected_Opts.txt
