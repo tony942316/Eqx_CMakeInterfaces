@@ -3,7 +3,7 @@ cmake_minimum_required(VERSION 3.28)
 if (Eqx_Clang)
     set(CMAKE_CXX_CLANG_TIDY clang-tidy-18
         "--config-file=${CMAKE_SOURCE_DIR}/.clang-tidy")
-elseif (Eqx_GCC OR Eqx_MSVC)
+elseif (Eqx_GNU OR Eqx_MSVC)
 else()
     message(FATAL_ERROR "Invalid Configuration!")
 endif()

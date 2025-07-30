@@ -1,8 +1,8 @@
 # Eqx_CMakeInterfaces
 
-[![CI](https://github.com/tony942316/Eqx_CMakeInterfaces/actions/workflows/ci_gcc_14.yml/badge.svg?branch=main)](https://github.com/tony942316/Eqx_CMakeInterfaces/actions/workflows/ci_gcc_14.yml)
-[![CI](https://github.com/tony942316/Eqx_CMakeInterfaces/actions/workflows/ci_clang_18.yml/badge.svg?branch=main)](https://github.com/tony942316/Eqx_CMakeInterfaces/actions/workflows/ci_clang_18.yml)
-[![CI](https://github.com/tony942316/Eqx_CMakeInterfaces/actions/workflows/ci_cl.yml/badge.svg?branch=main)](https://github.com/tony942316/Eqx_CMakeInterfaces/actions/workflows/ci_cl.yml)
+[![G++-14](https://github.com/tony942316/Eqx_CMakeInterfaces/actions/workflows/ci_gcc_14.yml/badge.svg?branch=main)](https://github.com/tony942316/Eqx_CMakeInterfaces/actions/workflows/ci_gcc_14.yml)
+[![Clang-18](https://github.com/tony942316/Eqx_CMakeInterfaces/actions/workflows/ci_clang_18.yml/badge.svg?branch=main)](https://github.com/tony942316/Eqx_CMakeInterfaces/actions/workflows/ci_clang_18.yml)
+[![CL](https://github.com/tony942316/Eqx_CMakeInterfaces/actions/workflows/ci_cl.yml/badge.svg?branch=main)](https://github.com/tony942316/Eqx_CMakeInterfaces/actions/workflows/ci_cl.yml)
 
 ## Contents
 
