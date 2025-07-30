@@ -52,60 +52,60 @@ set_target_properties(Main PROPERTIES
     - Eqx_MSVC: On if using MSVC
 
 - Eqx_Debug_Symbols:
-    Windows: /Zi
-    GCC/Clang: -g3
+    - Windows: /Zi
+    - GCC/Clang: -g3
 
 - Eqx_Warnings:
     - Eqx_Warnings_Basic:
-        Windows: /W4
-        GCC/Clang: -Wall -Wextra -Wconversion -Wpedantic
+        - Windows: /W4
+        - GCC/Clang: -Wall -Wextra -Wconversion -Wpedantic
     - Eqx_Warnings_Additional:
-        Windows: **NONE**
-        GCC/Clang: -Wfloat-equal -Wshadow -Wswitch-enum -Wcast-qual -Wundef
+        - Windows: **NONE**
+        - GCC/Clang: -Wfloat-equal -Wshadow -Wswitch-enum -Wcast-qual -Wundef
             -Wunused-macros -Wnon-virtual-dtor -Woverloaded-virtual
             -Wold-style-cast -Wdouble-promotion -Wformat=2 -Wformat-overflow
             -Wformat-truncation
-        GCC: -Wduplicated-cond -Wduplicated-branches
-        Clang: -Wbad-function-cast
+        - GCC: -Wduplicated-cond -Wduplicated-branches
+        - Clang: -Wbad-function-cast
     - Eqx_Warnings_Error:
-        Windows: /WX
-        GCC/Clang: -Werror
+        - Windows: /WX
+        - GCC/Clang: -Werror
 
 - Eqx_Optimizations:
     - Eqx_FastMath:
-        Windows: /fp:fast
-        GCC/Clang: -ffast-math
+        - Windows: /fp:fast
+        - GCC/Clang: -ffast-math
     - Eqx_NoExceptions:
-        Windows: /EHcs
-        GCC/Clang: -fno-exceptions
+        - Windows: /EHcs
+        - GCC/Clang: -fno-exceptions
     - Eqx_NoRTTI:
-        Windows: /GR-
-        GCC/Clang: -fno-rtti
+        - Windows: /GR-
+        - GCC/Clang: -fno-rtti
     - Eqx_Regular:
-        Windows:
-            Debug: /Od
-            Otherwise: /O2
-        GCC/Clang: -O3
+        - Windows:
+            - Debug: /Od
+            - Otherwise: /O2
+        - GCC/Clang: -O3
 
 - Eqx_Sanitizers:
     - Eqx_ASan:
-        Windows: /fsanitizer=address
-        GCC/Clang: -fsanitizer=address
+        - Windows: /fsanitizer=address
+        - GCC/Clang: -fsanitizer=address
     - Eqx_LSan:
-        Windows: **NONE**
-        GCC/Clang: -fsanitize=leak
+        - Windows: **NONE**
+        - GCC/Clang: -fsanitize=leak
     - Eqx_TSan:
-        Windows: **NONE**
-        GCC/Clang: -fsanitize=thread
+        - Windows: **NONE**
+        - GCC/Clang: -fsanitize=thread
     - Eqx_UBSan:
-        Windows: **NONE**
-        GCC/Clang: -fsanitize=undefined
+        - Windows: **NONE**
+        - GCC/Clang: -fsanitize=undefined
 
 - Eqx_Typical:
-    All: Eqx_Warngins
-    Debug: Eqx_Debug_Symbols Eqx_Sanitizers
-    Release: Eqx_Optimizations
-    RelWithDebInfo: Eqx_Debug_Symbols Eqx_Optimizations
+    - All: Eqx_Warngins
+    - Debug: Eqx_Debug_Symbols Eqx_Sanitizers
+    - Release: Eqx_Optimizations
+    - RelWithDebInfo: Eqx_Debug_Symbols Eqx_Optimizations
 
 ## Examples <a name="examples"></a>
 
