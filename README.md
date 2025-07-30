@@ -37,7 +37,7 @@ FetchContent_MakeAvailable(Eqx_CMakeInterfaces)
 
 add_executable(Main)
 target_sources(Main PRIVATE Main.cpp)
-# Eqx_Typcial gives various flags based on config
+# Eqx_Typical gives various flags based on config
 target_link_libraries(Main PRIVATE Eqx_Typical)
 set_target_properties(Main PROPERTIES
     CXX_EXTENSIONS Off
@@ -72,37 +72,37 @@ set_target_properties(Main PROPERTIES
         - GCC/Clang: -Werror
 
 - Eqx_Optimizations:
-    - Eqx_FastMath:
+    - Eqx_Optimizations_FastMath:
         - Windows: /fp:fast
         - GCC/Clang: -ffast-math
-    - Eqx_NoExceptions:
+    - Eqx_Optimizations_NoExceptions:
         - Windows: /EHcs
         - GCC/Clang: -fno-exceptions
-    - Eqx_NoRTTI:
+    - Eqx_Optimizations_NoRTTI:
         - Windows: /GR-
         - GCC/Clang: -fno-rtti
-    - Eqx_Regular:
+    - Eqx_Optimizations_Regular:
         - Windows:
             - Debug: /Od
             - Otherwise: /O2
         - GCC/Clang: -O3
 
 - Eqx_Sanitizers:
-    - Eqx_ASan:
-        - Windows: /fsanitizer=address
-        - GCC/Clang: -fsanitizer=address
-    - Eqx_LSan:
+    - Eqx_Sanitizers_ASan:
+        - Windows: /fsanitize=address
+        - GCC/Clang: -fsanitize=address
+    - Eqx_Sanitizers_LSan:
         - Windows: **NONE**
         - GCC/Clang: -fsanitize=leak
-    - Eqx_TSan:
+    - Eqx_Sanitizers_TSan:
         - Windows: **NONE**
         - GCC/Clang: -fsanitize=thread
-    - Eqx_UBSan:
+    - Eqx_Sanitizers_UBSan:
         - Windows: **NONE**
         - GCC/Clang: -fsanitize=undefined
 
 - Eqx_Typical:
-    - All: Eqx_Warngins
+    - All: Eqx_Warnings
     - Debug: Eqx_Debug_Symbols Eqx_Sanitizers
     - Release: Eqx_Optimizations
     - RelWithDebInfo: Eqx_Debug_Symbols Eqx_Optimizations
