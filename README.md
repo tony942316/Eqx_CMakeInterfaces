@@ -1,17 +1,24 @@
 # Eqx_CMakeInterfaces
 
+[![G++-14](https://github.com/tony942316/Eqx_CMakeInterfaces/actions/workflows/ci_gcc_14.yml/badge.svg?branch=main)](https://github.com/tony942316/Eqx_CMakeInterfaces/actions/workflows/ci_gcc_14.yml)
+[![Clang-18](https://github.com/tony942316/Eqx_CMakeInterfaces/actions/workflows/ci_clang_18.yml/badge.svg?branch=main)](https://github.com/tony942316/Eqx_CMakeInterfaces/actions/workflows/ci_clang_18.yml)
+[![CL](https://github.com/tony942316/Eqx_CMakeInterfaces/actions/workflows/ci_cl.yml/badge.svg?branch=main)](https://github.com/tony942316/Eqx_CMakeInterfaces/actions/workflows/ci_cl.yml)
+
+**Eqx_CMakeInterfaces** is a collection of small CMake interface libraries that
+provide a consistent set of compiler flags across GCC, Clang and MSVC. CMake
+**3.28+** and a multi‑config generator
+(e.g. Ninja Multi-Config or Visual Studio) are required.
+
 ## Contents
 
-1. [Summary](#summary)
+1. [Quick Start](#quickstart)
 2. [Features](#features)
-3. [Usage](#usage)
+3. [Examples](#examples)
 
-## Summary <a name="summary"></a>
+## Quick Start <a name="quickstart"></a>
 
-Collection of CMake interfaces that provide common compiler flags in a platform
-agnostic fashion, CMake version 3.28+ is required.
+Fetch the repository in your project and link any interface target you need:
 
-Basic Example ->
 ```cmake
 # CMakeLists.txt
 cmake_minimum_required(VERSION 3.28)
@@ -30,49 +37,78 @@ FetchContent_MakeAvailable(Eqx_CMakeInterfaces)
 
 add_executable(Main)
 target_sources(Main PRIVATE Main.cpp)
-
-# Eqx_Warnings is an interface that provides various compiler warning flags
-target_link_libraries(Main PRIVATE Eqx_Warnings)
-
+# Eqx_Typical gives various flags based on config
+target_link_libraries(Main PRIVATE Eqx_Typical)
 set_target_properties(Main PROPERTIES
     CXX_EXTENSIONS Off
     EXPORT_COMPILE_COMMANDS On)
 ```
-With Eqx_Warnings linked to this target the compiler will now have -Wall or
-/W4 passed to it depending on the compiler.
 
 ## Features <a name="features"></a>
 
-- Eqx_DebugSymbols      (Provides /Zi or -g3)
+- Variables:
+    - Eqx_GNU: On if using GCC
+    - Eqx_Clang: On if using Clang
+    - Eqx_MSVC: On if using MSVC
 
-- Eqx_Warnings          (Provides /W4 or -Wall -Wextra -Wconversion -Wpedantic)
+- Eqx_Debug_Symbols:
+    - Windows: /Zi
+    - GCC/Clang: -g3
 
-- Eqx_Optimizations     (Provides all of those below)
-    - Eqx_FastMath      (Provides /fp:fast or -ffast-math)
-    - Eqx_NoExceptions  (Provides /EHcs or -fno-exceptions)
-    - Eqx_NoRTTI        (Provides /GR- or -fno-rtti)
-    - Eqx_Regular       (Provides /O2t or -O3)
+- Eqx_Warnings:
+    - Eqx_Warnings_Basic:
+        - Windows: /W4
+        - GCC/Clang: -Wall -Wextra -Wconversion -Wpedantic
+    - Eqx_Warnings_Additional:
+        - Windows: **NONE**
+        - GCC/Clang: -Wfloat-equal -Wshadow -Wswitch-enum -Wcast-qual -Wundef
+            -Wunused-macros -Wnon-virtual-dtor -Woverloaded-virtual
+            -Wold-style-cast -Wdouble-promotion -Wformat=2 -Wformat-overflow
+            -Wformat-truncation
+        - GCC: -Wduplicated-cond -Wduplicated-branches
+        - Clang: -Wbad-function-cast
+    - Eqx_Warnings_Error:
+        - Windows: /WX
+        - GCC/Clang: -Werror
 
-- Eqx_Sanitizers        (Provides ASan UBSan and LSan .. only ASan for Windows)
-    - Eqx_ASan          (Provides /fsanitize=address or -fsanitize=address)
-    - Eqx_LSan          (Provides -fsanitize=leak)
-    - Eqx_TSan          (Provides -fsanitize=thread)
-    - Eqx_UBSan         (Provides -fsanitize=undefined)
+- Eqx_Optimizations:
+    - Eqx_Optimizations_FastMath:
+        - Windows: /fp:fast
+        - GCC/Clang: -ffast-math
+    - Eqx_Optimizations_NoExceptions:
+        - Windows: /EHcs
+        - GCC/Clang: -fno-exceptions
+    - Eqx_Optimizations_NoRTTI:
+        - Windows: /GR-
+        - GCC/Clang: -fno-rtti
+    - Eqx_Optimizations_Regular:
+        - Windows:
+            - Debug: /Od
+            - Otherwise: /O2
+        - GCC/Clang: -O3
 
-- Eqx_Typical           (Provides those below based on compiler and config)
-    - Eqx_Warnings      (All)
-    - Eqx_DebugSymbols  (GCC/Clang:All,MSVC:Debug)
-    - Eqx_Optimizations (GCC/Clang:None,MSVC:Release)
-    - Eqx_Sanitizers    (GCC/Clang:All,MSVC:Debug)
+- Eqx_Sanitizers:
+    - Eqx_Sanitizers_ASan:
+        - Windows: /fsanitize=address
+        - GCC/Clang: -fsanitize=address
+    - Eqx_Sanitizers_LSan:
+        - Windows: **NONE**
+        - GCC/Clang: -fsanitize=leak
+    - Eqx_Sanitizers_TSan:
+        - Windows: **NONE**
+        - GCC/Clang: -fsanitize=thread
+    - Eqx_Sanitizers_UBSan:
+        - Windows: **NONE**
+        - GCC/Clang: -fsanitize=undefined
 
-## Usage <a name="usage"></a>
+- Eqx_Typical:
+    - All: Eqx_Warnings
+    - Debug: Eqx_Debug_Symbols Eqx_Sanitizers
+    - Release: Eqx_Optimizations
+    - RelWithDebInfo: Eqx_Debug_Symbols Eqx_Optimizations
 
-To use Eqx_CMakeInterfaces in your project use FetchContent to obtain the repo,
-alternatively you may clone, download, or extract the repo onto your system
-and `include(path/to/Eqx_CMakeInterfaces/Interfaces.cmake)` or
-`add_subdirectory(path/to/Eqx_CMakeInterfaces)`.
+## Examples <a name="examples"></a>
 
-Example ->
 ```cmake
 # CMakeLists.txt
 cmake_minimum_required(VERSION 3.28)
@@ -86,22 +122,20 @@ FetchContent_Declare(
 
 FetchContent_MakeAvailable(Eqx_CMakeInterfaces)
 
-# Alternatively use include(path/to/Eqx_CMakeInterfaces/Interfaces.cmake)
-# Or use add_subdirectory(path/to/Eqx_CMakeInterfaces)
-
 add_executable(Main)
 target_sources(Main PRIVATE Main.cpp)
-
-# Link your target to an Eqx Interface
 target_link_libraries(Main PRIVATE Eqx_Typical)
-
 set_target_properties(Main PROPERTIES
     CXX_EXTENSIONS Off
     EXPORT_COMPILE_COMMANDS On)
-```
 
-With Eqx_Typical the compiler will have the following flags
-- MSVC (Debug): /W4 /Zi /fsanitize=address
-- MSVC (Release): /W4 /fp:fast /EHcs /GR- /O2t
-- GCC/Clang: -Wall -Wextra -Wconversion -Wpedantic -g3 -fsanitize=address
--fsanitize=leak -fsanitize=undefined
+add_executable(Other)
+target_sources(Other PRIVATE Other.cpp)
+if (Eqx_GNU)
+    target_link_libraries(Other PRIVATE Eqx_Sanitizers_TSan)
+elseif (Eqx_MSVC)
+    target_link_libraries(Other PRIVATE Eqx_Sanitizers_ASan)
+elseif (Eqx_Clang)
+    target_link_libraries(Other PRIVATE Eqx_Sanitizers_UBSan)
+endif()
+```
