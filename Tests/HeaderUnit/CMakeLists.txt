@@ -7,9 +7,9 @@ target_include_directories(fs INTERFACE
     ${CMAKE_CURRENT_SOURCE_DIR}/)
 
 eqx_add_headerunit(fs_typical)
-target_sources(fs INTERFACE
+target_sources(fs_typical INTERFACE
     ${CMAKE_CURRENT_SOURCE_DIR}/fs.hpp)
-target_include_directories(fs INTERFACE
+target_include_directories(fs_typical INTERFACE
     ${CMAKE_CURRENT_SOURCE_DIR}/)
 target_link_libraries(fs_typical INTERFACE Eqx_Typical)
 

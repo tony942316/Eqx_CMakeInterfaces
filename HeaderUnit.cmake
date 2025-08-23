@@ -9,8 +9,8 @@ function(eqx_add_headerunit LIB_NAME)
                 ${CMAKE_CURRENT_BINARY_DIR}/${LIB_NAME}_$<CONFIG>.pcm
             COMMAND ${CMAKE_CXX_COMPILER}
                 -std=c++20 -fmodule-header
-                $<TARGET_PROPERTY:${LIB_NAME},INTERFACE_COMPILE_OPTIONS>
-                $<TARGET_PROPERTY:${LIB_NAME},SOURCES> -o
+                $<TARGET_PROPERTY:${LIB_NAME},INTERFACE_LINK_LIBRARIES>
+                $<TARGET_PROPERTY:${LIB_NAME},INTERFACE_SOURCES> -o
                 ${CMAKE_CURRENT_BINARY_DIR}/${LIB_NAME}_$<CONFIG>.pcm
             DEPENDS
                 $<TARGET_PROPERTY:${LIB_NAME},SOURCES>
@@ -26,5 +26,7 @@ function(eqx_add_headerunit LIB_NAME)
         add_dependencies(${LIB_NAME} Eqx_PT_${LIB_NAME})
     elseif (Eqx_GNU)
     elseif (Eqx_MSVC)
+    else()
+        message(FATAL_ERROR "Failure!")
     endif()
 endfunction()
