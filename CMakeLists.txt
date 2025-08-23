@@ -7,6 +7,7 @@ project(Eqx_CMakeInterfaces
     LANGUAGES CXX)
 
 include(Interfaces/Interfaces.cmake)
+include(HeaderUnit.cmake)
 
 if (CMAKE_PROJECT_NAME STREQUAL PROJECT_NAME)
     enable_testing()
