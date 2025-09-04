@@ -34,6 +34,8 @@ set_target_properties(Test_HeaderUnit_fs_typical PROPERTIES
     CXX_EXTENSIONS Off
     CXX_STANDARD_REQUIRED On)
 
+eqx_copy_asan(Test_HeaderUnit_fs_typical)
+
 add_test(NAME Test_HeaderUnit_fs
     COMMAND $<TARGET_FILE:Test_HeaderUnit_fs>)
 
