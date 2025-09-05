@@ -53,7 +53,8 @@ TEST(CMAKE_TARGET_NAME, Basic)
     out_file.close();
     ASSERT_TRUE(out_file.is_open() == false);
 
-    ASSERT_TRUE(std::filesystem::exists(path_guard.get_path()) == true);
+    ASSERT_TRUE(std::filesystem::exists(path_guard.get_path()) == true)
+        << "Path Doesn't Exist: " << path_guard.get_path();
 
     auto in_file = std::ifstream{ path_guard.get_path(), std::ios::in };
     ASSERT_TRUE(in_file.is_open() == true);
