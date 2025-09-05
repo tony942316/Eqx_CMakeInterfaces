@@ -4,7 +4,11 @@ import <fs.hpp>;
 
 #include <gtest/gtest.h>
 
-TEST(fs, basic)
+#ifndef CMAKE_TARGET_NAME
+static_assert(false, "CMAKE_TARGET_NAME not defined!");
+#endif // CMAKE_TARGET_NAME
+
+TEST(CMAKE_TARGET_NAME, Basic)
 {
     class Path_Guard
     {

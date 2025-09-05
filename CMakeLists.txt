@@ -9,6 +9,7 @@ project(Eqx_CMakeInterfaces
 include(Interfaces/Interfaces.cmake)
 include(HeaderUnit.cmake)
 include(CopyASanMSVC.cmake)
+include(VersionInfo.cmake)
 
 if (CMAKE_PROJECT_NAME STREQUAL PROJECT_NAME)
     enable_testing()
