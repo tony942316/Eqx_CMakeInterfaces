@@ -1,5 +1,15 @@
 # fs.cmake
 
+include(FetchContent)
+
+FetchContent_Declare(googletest
+  GIT_REPOSITORY https://github.com/google/googletest.git
+  GIT_TAG v1.14.0)
+
+set(INSTALL_GTEST OFF CACHE BOOL "" FORCE)
+
+FetchContent_MakeAvailable(googletest)
+
 eqx_add_headerunit(fs)
 target_sources(fs INTERFACE
     ${CMAKE_CURRENT_SOURCE_DIR}/fs.hpp)
@@ -18,7 +28,7 @@ add_executable(Test_HeaderUnit_fs)
 target_sources(Test_HeaderUnit_fs PRIVATE
     ${CMAKE_CURRENT_SOURCE_DIR}/fs.cpp)
 target_compile_features(Test_HeaderUnit_fs PRIVATE cxx_std_20)
-target_link_libraries(Test_HeaderUnit_fs PRIVATE fs)
+target_link_libraries(Test_HeaderUnit_fs PRIVATE fs GTest::gtest_main)
 set_target_properties(Test_HeaderUnit_fs PROPERTIES
     EXPORT_COMPILE_COMMANDS On
     CXX_EXTENSIONS Off
@@ -28,7 +38,8 @@ add_executable(Test_HeaderUnit_fs_typical)
 target_sources(Test_HeaderUnit_fs_typical PRIVATE
     ${CMAKE_CURRENT_SOURCE_DIR}/fs.cpp)
 target_compile_features(Test_HeaderUnit_fs_typical PRIVATE cxx_std_20)
-target_link_libraries(Test_HeaderUnit_fs_typical PRIVATE fs_typical)
+target_link_libraries(Test_HeaderUnit_fs_typical PRIVATE
+    fs_typical GTest::gtest_main)
 set_target_properties(Test_HeaderUnit_fs_typical PROPERTIES
     EXPORT_COMPILE_COMMANDS On
     CXX_EXTENSIONS Off
@@ -41,3 +52,7 @@ add_test(NAME Test_HeaderUnit_fs
 
 add_test(NAME Test_HeaderUnit_fs_typical
     COMMAND $<TARGET_FILE:Test_HeaderUnit_fs_typical>)
+
+include(GoogleTest)
+gtest_discover_tests(Test_HeaderUnit_fs)
+gtest_discover_tests(Test_HeaderUnit_fs_typical)
