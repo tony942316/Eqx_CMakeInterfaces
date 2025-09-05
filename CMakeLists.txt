@@ -8,7 +8,7 @@ project(Eqx_CMakeInterfaces
 
 include(Interfaces/Interfaces.cmake)
 include(HeaderUnit.cmake)
-include(CopyAsanMSVC.cmake)
+include(CopyASanMSVC.cmake)
 
 if (CMAKE_PROJECT_NAME STREQUAL PROJECT_NAME)
     enable_testing()
