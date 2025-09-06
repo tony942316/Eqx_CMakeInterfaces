@@ -12,12 +12,17 @@ set(INSTALL_GTEST OFF CACHE BOOL "" FORCE)
 
 FetchContent_MakeAvailable(googletest)
 
-target_compile_definitions(gtest_main PRIVATE
-    _DISABLE_STRING_ANNOTATION _DISABLE_VECTOR_ANNOTATION)
-target_compile_definitions(gtest PRIVATE
-    _DISABLE_STRING_ANNOTATION _DISABLE_VECTOR_ANNOTATION)
-target_link_libraries(gtest_main PRIVATE Eqx_Typical)
-target_link_libraries(gtest PRIVATE Eqx_Typical)
+if (Eqx_MSVC)
+    target_compile_definitions(gtest_main PRIVATE
+        _DISABLE_STRING_ANNOTATION _DISABLE_VECTOR_ANNOTATION)
+    target_compile_definitions(gtest PRIVATE
+        _DISABLE_STRING_ANNOTATION _DISABLE_VECTOR_ANNOTATION)
+    target_link_libraries(gtest_main PRIVATE Eqx_Typical)
+    target_link_libraries(gtest PRIVATE Eqx_Typical)
+elseif (Eqx_Clang OR Eqx_GNU)
+else()
+    message(FATAL_ERROR "Invalid Configuration!")
+endif()
 
 eqx_add_headerunit(fs)
 target_sources(fs INTERFACE
