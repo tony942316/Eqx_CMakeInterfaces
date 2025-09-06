@@ -19,6 +19,13 @@ target_link_libraries(gtest_hu_typical_PRIVATE INTERFACE
     GTest::gtest_main Eqx_Typical)
 target_link_libraries(gtest_hu_typical INTERFACE GTest::gtest_main Eqx_Typical)
 
+if (Eqx_Clang OR Eqx_GNU)
+    target_compile_options(gtest_hu_typical_PRIVATE INTERFACE -w)
+elseif (Eqx_MSVC)
+else()
+    message(FATAL_ERROR "Invalid Configuration!")
+endif()
+
 add_executable(Test_HeaderUnit_GTest)
 target_sources(Test_HeaderUnit_GTest PRIVATE
     ${CMAKE_CURRENT_SOURCE_DIR}/gtest.cpp)
