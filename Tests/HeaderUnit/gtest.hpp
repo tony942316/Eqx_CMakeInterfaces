@@ -1,0 +1,8 @@
+// gtest.hpp
+
+#ifndef TESTS_HEADERUNIT_GTEST_HPP
+#define TESTS_HEADERUNIT_GTEST_HPP
+
+#include <gtest/gtest.h>
+
+#endif // TESTS_HEADERUNIT_GTEST_HPP
