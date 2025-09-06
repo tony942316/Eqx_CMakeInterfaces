@@ -66,12 +66,6 @@ set_target_properties(Test_HeaderUnit_fs_typical PROPERTIES
 
 eqx_copy_asan(Test_HeaderUnit_fs_typical)
 
-add_test(NAME Test_HeaderUnit_fs
-    COMMAND $<TARGET_FILE:Test_HeaderUnit_fs>)
-
-add_test(NAME Test_HeaderUnit_fs_typical
-    COMMAND $<TARGET_FILE:Test_HeaderUnit_fs_typical>)
-
 include(GoogleTest)
 gtest_discover_tests(Test_HeaderUnit_fs)
 gtest_discover_tests(Test_HeaderUnit_fs_typical)

@@ -8,6 +8,9 @@ import <fs.hpp>;
 static_assert(false, "CMAKE_TARGET_NAME not defined!");
 #endif // CMAKE_TARGET_NAME
 
+#define STR_IMPL(x) #x
+#define STR(x) STR_IMPL(x)
+
 TEST(CMAKE_TARGET_NAME, Basic)
 {
     class Path_Guard
@@ -43,12 +46,14 @@ TEST(CMAKE_TARGET_NAME, Basic)
     };
 
     auto path_guard =
-        Path_Guard{ std::filesystem::temp_directory_path() / "temp.txt" };
+        Path_Guard{ std::filesystem::temp_directory_path()
+            / STR(CMAKE_TARGET_NAME) "_temp.txt" };
 
     auto out_file = std::ofstream{ path_guard.get_path(),
         std::ios::out | std::ios::trunc };
 
-    ASSERT_TRUE(out_file.is_open() == true);
+    ASSERT_TRUE(out_file.is_open() == true) << "Path: "
+        << path_guard.get_path();
     out_file << "Hello!\n";
     out_file.close();
     ASSERT_TRUE(out_file.is_open() == false);
