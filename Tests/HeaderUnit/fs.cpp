@@ -64,5 +64,5 @@ TEST(CMAKE_TARGET_NAME, Basic)
     in_file.close();
     ASSERT_TRUE(in_file.is_open() == false);
 
-    EXPECT_TRUE(str == "Hello!");
+    EXPECT_TRUE(str == "Hello!") << "Str: " << str;
 }

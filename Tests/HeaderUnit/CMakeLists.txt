@@ -12,6 +12,13 @@ set(INSTALL_GTEST OFF CACHE BOOL "" FORCE)
 
 FetchContent_MakeAvailable(googletest)
 
+target_compile_definitions(gtest_main PRIVATE
+    _DISABLE_STRING_ANNOTATION _DISABLE_VECTOR_ANNOTATION)
+target_compile_definitions(gtest PRIVATE
+    _DISABLE_STRING_ANNOTATION _DISABLE_VECTOR_ANNOTATION)
+target_link_libraries(gtest_main PRIVATE Eqx_Typical)
+target_link_libraries(gtest PRIVATE Eqx_Typical)
+
 eqx_add_headerunit(fs)
 target_sources(fs INTERFACE
     ${CMAKE_CURRENT_SOURCE_DIR}/fs.hpp)
@@ -43,7 +50,8 @@ target_sources(Test_HeaderUnit_fs_typical PRIVATE
     ${CMAKE_CURRENT_SOURCE_DIR}/fs.cpp)
 target_compile_features(Test_HeaderUnit_fs_typical PRIVATE cxx_std_20)
 target_compile_definitions(Test_HeaderUnit_fs_typical PRIVATE
-    CMAKE_TARGET_NAME=Test_HeaderUnit_fs_typical)
+    CMAKE_TARGET_NAME=Test_HeaderUnit_fs_typical _DISABLE_STRING_ANNOTATION
+    _DISABLE_VECTOR_ANNOTATION)
 target_link_libraries(Test_HeaderUnit_fs_typical PRIVATE
     fs_typical GTest::gtest_main)
 set_target_properties(Test_HeaderUnit_fs_typical PROPERTIES

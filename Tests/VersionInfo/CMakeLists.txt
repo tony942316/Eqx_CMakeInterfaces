@@ -12,6 +12,13 @@ set(INSTALL_GTEST OFF CACHE BOOL "" FORCE)
 
 FetchContent_MakeAvailable(googletest)
 
+target_compile_definitions(gtest_main PRIVATE
+    _DISABLE_STRING_ANNOTATION _DISABLE_VECTOR_ANNOTATION)
+target_compile_definitions(gtest PRIVATE
+    _DISABLE_STRING_ANNOTATION _DISABLE_VECTOR_ANNOTATION)
+target_link_libraries(gtest_main PRIVATE Eqx_Typical)
+target_link_libraries(gtest PRIVATE Eqx_Typical)
+
 add_executable(Test_VersionInfo)
 target_sources(Test_VersionInfo PRIVATE ${CMAKE_CURRENT_SOURCE_DIR}/Main.cpp)
 target_compile_definitions(Test_VersionInfo PRIVATE
@@ -28,7 +35,8 @@ target_sources(Test_VersionInfo_typical PRIVATE
     ${CMAKE_CURRENT_SOURCE_DIR}/Main.cpp)
 target_compile_definitions(Test_VersionInfo_typical PRIVATE
     EXPECTED_VERSION=\"${PROJECT_VERSION}\" EXPECTED_CONFIG=\"$<CONFIG>\"
-    CMAKE_TARGET_NAME=Test_VersionInfo_typical)
+    CMAKE_TARGET_NAME=Test_VersionInfo_typical _DISABLE_STRING_ANNOTATION
+    _DISABLE_VECTOR_ANNOTATION)
 target_link_libraries(Test_VersionInfo_typical PRIVATE
     Eqx_VersionInfo GTest::gtest_main Eqx_Typical)
 set_target_properties(Test_VersionInfo_typical PROPERTIES
